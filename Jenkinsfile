@@ -17,7 +17,7 @@ pipeline {
         stage('Copy to Personal Workspace') {
             steps {
                 // Copy the stashed file to the personal workspace
-                sh 'mkdir -p /home/master/Desktop/Artifact/'
+                // sh 'mkdir -p /home/master/Desktop/Artifact/'
                 unstash 'myFile'
                 sh 'cp target/SampleWebApplication-1.0-SNAPSHOT.war /home/master/Desktop/Artifact/'
             }
