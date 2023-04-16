@@ -4,7 +4,10 @@ pipeline {
         stage("CheckOut in build branch") {
             steps {
                 echo "Checkout git repo"
-                sh "pwd; ls -lrt"
+                sh  """
+                        pwd 
+                        ls -lrt
+                    """
             }
         }
         stage("Building Artifact") {
@@ -19,7 +22,10 @@ pipeline {
                 // Copy the stashed file to the personal workspace
                 // sh 'mkdir -p /home/master/Desktop/Artifact/'
                 unstash 'myFile'
-                sh 'echo $WORKSPACE; #cp target/SampleWebApplication-1.0-SNAPSHOT.war /home/master/Desktop/Artifact/'
+                sh  """
+                        echo $WORKSPACE  
+                        cp $WORKSPACE/target/*.war /home/master/Desktop/Artifact/ 
+                    """
             }
         }
     }
