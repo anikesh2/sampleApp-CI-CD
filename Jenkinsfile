@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage("CheckOut") {
+        stage("CheckOut in build branch") {
             steps {
                 echo "Checkout git repo"
             }
