@@ -1,19 +1,16 @@
 pipeline {
     agent any
     stages {
-        stage("CheckOut") {
+        stage("CheckOut in build branch") {
             steps {
                 echo "Checkout git repo"
+                sh "pwd; ls -lrt"
             }
         }
-        stage("build") {
+        stage("Building Artifact") {
             steps {
                 echo "Buildling the application"
-            }
-        }
-        stage("Deploy"){
-            steps {
-                echo "Deploying the application"
+                sh 'mvn clean package'
             }
         }
     }
