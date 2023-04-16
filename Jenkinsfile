@@ -24,7 +24,7 @@ pipeline {
                 unstash 'myFile'
                 sh  """
                         echo $WORKSPACE  
-                        sudo cp $WORKSPACE/target/*.war /home/master/Desktop/Artifact/ 
+                        cp $WORKSPACE/target/*.war /home/master/Documents/repo/
                     """
             }
         }
