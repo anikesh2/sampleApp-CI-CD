@@ -13,7 +13,7 @@ pipeline {
         stage("Building Artifact") {
             steps {
                 echo "Buildling the application"
-                sh 'mvn clean package'
+                sh 'mvn clean install'
                 stash name: 'myFile', includes: 'target/SampleWebApplication-1.0-SNAPSHOT.war'
             }
         }
