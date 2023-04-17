@@ -1,18 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage("CheckOut in build branch") {
-            steps {
-                echo "Checkout git repo"
-                sh  """
-                        pwd 
-                        ls -lrt
-                    """
-            }
-        }
         stage("Building Artifact") {
             steps {
-                echo "Buildling the application"
+                checkout scmGit(branches: [[name: '*/deploy']], extensions: [], userRemoteConfigs: [[credentialsId: 'Git', url: 'https://github.com/anikesh2/sampleApp-CI-CD']])
                 sh 'mvn clean install'
                 stash name: 'myFile', includes: 'target/SampleWebApplication-1.0-SNAPSHOT.war'
             }
