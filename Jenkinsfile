@@ -15,7 +15,7 @@ pipeline {
                 unstash 'myFile'
                 sh  """
                         echo $WORKSPACE  
-                        sudo cp $WORKSPACE/target/*.war /home/master/Documents/repo/
+                        sudo cp $WORKSPACE/*.war /home/master/Documents/repo/
                     """
             }
         }
