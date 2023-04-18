@@ -9,7 +9,8 @@ pipeline {
         }
         stage('Creating Image ') {
             steps {
-                sh "docker build -t webapp:v$BUILD_NUMBER"
+                sh "ls -lrt"
+                sh "docker build -t webapp:v$BUILD_NUMBER ."
             }
         }
         stage('Creating Container from our Image') {
