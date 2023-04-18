@@ -5,18 +5,16 @@ pipeline {
             steps {
                 checkout scmGit(branches: [[name: '*/deploy']], extensions: [], userRemoteConfigs: [[credentialsId: 'Git', url: 'https://github.com/anikesh2/sampleApp-CI-CD']])
                 sh 'mvn clean install'
-                stash name: 'myFile', includes: 'target/SampleWebApplication-1.0-SNAPSHOT.war'
             }
         }
-        stage('Copy to Personal Workspace') {
+        stage('Creating Image ') {
             steps {
-                // Copy the stashed file to the personal workspace
-                // sh 'mkdir -p /home/master/Desktop/Artifact/'
-                unstash 'myFile'
-                sh  """
-                        echo $WORKSPACE  
-                        sudo cp $WORKSPACE/*.war /home/master/Documents/repo/
-                    """
+                sh "docker build -t webapp:v$BUILD_NUMBER"
+            }
+        }
+        stage('Creating Container from our Image') {
+            steps {
+                sh "docker run --name webapp -d -p 8081:8080 webapp:v$BUILD_NUMBER"
             }
         }
     }
