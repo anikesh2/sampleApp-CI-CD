@@ -14,7 +14,11 @@ pipeline {
         }
         stage('Creating Container from our Image') {
             steps {
-                sh "docker run --name webapp -d -p 8081:8080 webapp:v$BUILD_NUMBER"
+                sh """
+                    docker stop webapp || true
+                    docker rm webapp || true
+                    docker run --name webapp -d -p 8081:8080 webapp:v$BUILD_NUMBER
+                   """
             }
         }
     }
