@@ -5,7 +5,6 @@ pipeline {
             steps {
                 checkout scmGit(branches: [[name: '*/deploy']], extensions: [], userRemoteConfigs: [[credentialsId: 'Git', url: 'https://github.com/anikesh2/sampleApp-CI-CD']])
                 sh 'mvn clean install'
-                sh 'sudo usermod -aG docker $(whoami)'
             }
         }
         stage('Creating Image ') {
