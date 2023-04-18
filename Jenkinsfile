@@ -10,15 +10,15 @@ pipeline {
         stage('Creating Image ') {
             steps {
                 sh "ls -lrt"
-                sh "sudo docker build -t webapp:v$BUILD_NUMBER ."
+                sh "docker build -t webapp:v$BUILD_NUMBER ."
             }
         }
         stage('Creating Container from our Image') {
             steps {
                 sh """
-                    sudo docker stop webapp || true
-                    sudo docker rm webapp || true
-                    sudo docker run --name webapp -d -p 8081:8080 webapp:v$BUILD_NUMBER
+                    docker stop webapp || true
+                    docker rm webapp || true
+                    docker run --name webapp -d -p 8081:8080 webapp:v$BUILD_NUMBER
                    """
             }
         }
